@@ -1,51 +1,71 @@
-// Import Suspense from React, which is required to render a fallback UI while lazy-loaded components are loading.
 import { Suspense } from 'react'
-
-// Import BrowserRouter, Routes, and Route from react-router-dom to handle client-side routing.
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-// Import the route configuration array containing our path-to-component mapping definitions.
-import routes from './routes'
-
-// Import the Sidebar layout component, which contains the navigation menu links.
-import Sidebar from './components/Sidebar'
-
-// Import Toaster from react-hot-toast to handle global operations notification banners.
+import { BrowserRouter, useRoutes, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
-
-// Import App.css for stylesheet resets, styling rules, and layout classes.
+import routes from './routes'
+import Sidebar from './components/Sidebar'
+import { AuthProvider, useAuth } from './context/AuthContext'
+import { LeadProvider } from './context/LeadContext'
+import { ThemeProvider } from './context/ThemeContext'
 import './App.css'
 
-// Define the root App component that wraps the layout structure and registers the routing tree.
-export default function App() {
-  return (
-    // Wrap the entire application in BrowserRouter to manage and sync history state with the browser address bar.
-    <BrowserRouter>
-      {/* Top-level layout container styled with Tailwind CSS for full viewport height and default slate-based colors */}
-      <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-200">
-        {/* React Hot Toast notification center */}
-        <Toaster position="top-right" />
-        {/* Main layout grid/flex container setting a maximum content width and centering it on screen */}
-        <div className="mx-auto flex max-w-7xl flex-col md:flex-row">
-          {/* Sidebar navigation component that remains persistent on the left of the page layout */}
-          <Sidebar />
+/**
+ * AppContent component.
+ * Renders the layout grid, sidebar, notifications, and nested routes.
+ * Accesses AuthContext to hide the Sidebar on login and register pages.
+ */
+function AppContent() {
+  const element = useRoutes(routes)
+  const location = useLocation()
+  const { token } = useAuth()
 
-          {/* Wrapper container for the main page content, occupying all remaining horizontal space */}
-          <div className="flex-1 min-w-0 pt-14 pb-16 md:pt-0 md:pb-0">
-            {/* Suspense handles asynchronous loading of React.lazy components by rendering a loading indicator */}
-            <Suspense fallback={<div className="p-6 text-sm text-slate-500">Loading requested view...</div>}>
-              {/* Routes container coordinates route matching, rendering only the single Route that matches the current URL */}
-              <Routes>
-                {/* Map over the routes array configuration to dynamically declare Route elements */}
-                {routes.map((route) => (
-                  // Set a unique key, register the relative URL path, and assign the element component to render.
-                  <Route key={route.path} path={route.path} element={route.element} />
-                ))}
-              </Routes>
-            </Suspense>
-          </div>
+  // Determine if we are on a login or register page, or if we have no token.
+  // Sidebar should only show if user is authenticated and not on an authentication page.
+  const isAuthPage = ['/login', '/register'].includes(location.pathname)
+  const showSidebar = token && !isAuthPage
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-200">
+      {/* Global Toast Notifications */}
+      <Toaster position="top-right" />
+
+      {/* Main Layout Grid */}
+      <div className="mx-auto flex max-w-7xl flex-col md:flex-row">
+        {/* Render Sidebar only for authenticated users outside auth pages */}
+        {showSidebar && <Sidebar />}
+
+        {/* Content Wrapper */}
+        <div className={`flex-1 min-w-0 ${showSidebar ? 'pt-14 pb-16 md:pt-0 md:pb-0' : ''}`}>
+          {/* Suspense handles loading fallback for lazy-loaded route views */}
+          <Suspense fallback={
+            <div className="flex h-[80vh] items-center justify-center p-6 text-sm text-slate-500">
+              <div className="flex flex-col items-center gap-2">
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
+                <span>Loading view...</span>
+              </div>
+            </div>
+          }>
+            {element}
+          </Suspense>
         </div>
       </div>
+    </div>
+  )
+}
+
+/**
+ * Root App Component.
+ * Registers routing, authentication state, and lead data context providers.
+ */
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <LeadProvider>
+          <ThemeProvider>
+            <AppContent />
+          </ThemeProvider>
+        </LeadProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

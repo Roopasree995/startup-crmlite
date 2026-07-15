@@ -26,7 +26,7 @@ export default function Sidebar() {
             <Sparkles className="h-3.5 w-3.5 text-white" />
           </div>
           <div className="flex items-baseline gap-1">
-            <span className="text-xs font-bold tracking-tight text-gray-900 dark:text-white">AuraCRM</span>
+            <span className="text-xs font-bold tracking-tight text-gray-900 dark:text-white">Startup CRM</span>
             <span className="text-[8px] text-gray-400 dark:text-gray-550 font-bold uppercase tracking-wider">LITE</span>
           </div>
         </div>
@@ -65,7 +65,7 @@ export default function Sidebar() {
             </div>
             <div className="flex flex-col">
               <div className="flex items-baseline gap-1">
-                <span className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">AuraCRM</span>
+                <span className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">Startup CRM</span>
                 <span className="text-[10px] text-gray-400 dark:text-gray-550 font-bold uppercase tracking-wider">LITE</span>
               </div>
             </div>
@@ -164,7 +164,7 @@ export default function Sidebar() {
           </div>
           <div className="hidden lg:flex flex-col">
             <div className="flex items-baseline gap-1">
-              <span className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">AuraCRM</span>
+              <span className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">Startup CRM</span>
               <span className="text-[10px] text-gray-400 dark:text-gray-400 font-bold uppercase tracking-wider">LITE</span>
             </div>
           </div>

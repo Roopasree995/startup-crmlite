@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Plus, LayoutGrid, List, X } from 'lucide-react'
-import toast from 'react-hot-toast'
 
 // Hooks and subcomponents
 import useLocalStorage from '../hooks/useLocalStorage'
@@ -78,27 +77,9 @@ export default function Leads() {
     if (selectedLead) {
       // Edit mode: update existing lead
       updateLead(selectedLead.id, formData)
-      toast.success('Lead updated successfully!', {
-        duration: 3000,
-        style: {
-          border: '1px solid #22C55E',
-          padding: '12px',
-          color: '#15803D',
-          background: '#F0FDF4',
-        },
-      })
     } else {
       // Create mode: add new lead
       addLead(formData)
-      toast.success('Lead created successfully!', {
-        duration: 3000,
-        style: {
-          border: '1px solid #22C55E',
-          padding: '12px',
-          color: '#15803D',
-          background: '#F0FDF4',
-        },
-      })
     }
     handleCloseModal()
   }
@@ -109,16 +90,6 @@ export default function Leads() {
   const handleConfirmDelete = () => {
     if (!leadToDelete) return
     deleteLead(leadToDelete.id)
-    toast.error(`Lead for ${leadToDelete.name} has been removed.`, {
-      icon: '🗑️',
-      duration: 3500,
-      style: {
-        border: '1px solid #EF4444',
-        padding: '12px',
-        color: '#B91C1C',
-        background: '#FEF2F2',
-      },
-    })
     setLeadToDelete(null)
   }
 
