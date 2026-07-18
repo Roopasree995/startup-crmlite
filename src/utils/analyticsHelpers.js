@@ -46,7 +46,7 @@ export function getStatusDistribution(leads = []) {
       return {
         name: status,
         value: count,
-        color: STATUS_COLORS[status] || '#94A3B8',
+        color: STATUS_COLORS[status] || 'var(--brand-new)',
         percentage: Math.round(percentage * 10) / 10,
       };
     })

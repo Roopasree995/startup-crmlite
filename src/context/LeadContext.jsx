@@ -67,10 +67,10 @@ export function LeadProvider({ children }) {
         toast.success(result.message || 'Lead created successfully!', {
           duration: 3000,
           style: {
-            border: '1px solid #22C55E',
+            border: '1px solid var(--brand-success)',
             padding: '12px',
-            color: '#15803D',
-            background: '#F0FDF4',
+            color: 'var(--brand-success)',
+            background: 'var(--brand-surface)',
           },
         })
         return result.data
@@ -98,10 +98,10 @@ export function LeadProvider({ children }) {
         toast.success(result.message || 'Lead updated successfully!', {
           duration: 3000,
           style: {
-            border: '1px solid #22C55E',
+            border: '1px solid var(--brand-success)',
             padding: '12px',
-            color: '#15803D',
-            background: '#F0FDF4',
+            color: 'var(--brand-success)',
+            background: 'var(--brand-surface)',
           },
         })
         return result.data
@@ -130,10 +130,10 @@ export function LeadProvider({ children }) {
           icon: '🗑️',
           duration: 3500,
           style: {
-            border: '1px solid #EF4444',
+            border: '1px solid var(--brand-error)',
             padding: '12px',
-            color: '#B91C1C',
-            background: '#FEF2F2',
+            color: 'var(--brand-error)',
+            background: 'var(--brand-surface)',
           },
         })
       }

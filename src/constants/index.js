@@ -17,12 +17,12 @@ export const SOURCE_OPTIONS = [
 ];
 
 export const STATUS_COLORS = {
-  New: '#94A3B8',
-  Contacted: '#2563EB',
-  Meeting: '#F59E0B',
-  Proposal: '#7C3AED',
-  Won: '#22C55E',
-  Lost: '#EF4444',
+  New: 'var(--brand-new)',
+  Contacted: 'var(--brand-primary)',
+  Meeting: 'var(--brand-warning)',
+  Proposal: 'var(--brand-secondary)',
+  Won: 'var(--brand-success)',
+  Lost: 'var(--brand-error)',
 };
 
 // Map full statuses from lead objects to shortened forms
@@ -37,19 +37,19 @@ export const STATUS_MAP = {
 
 // Standard primary colors for non-status charts
 export const CHART_COLORS = {
-  primary: '#2563EB', // Blue
-  success: '#22C55E', // Green
-  warning: '#F59E0B', // Amber
-  purple: '#7C3AED',  // Purple
-  danger: '#EF4444',  // Red
-  slate: '#64748B',   // Slate
+  primary: 'var(--brand-primary)',
+  success: 'var(--brand-success)',
+  warning: 'var(--brand-warning)',
+  purple: 'var(--brand-secondary)',
+  danger: 'var(--brand-error)',
+  slate: 'var(--brand-accent)',
 };
 
 // Recharts theme styling variables for Light vs Dark Modes
 export const getChartTheme = (isDarkMode) => ({
-  gridColor: isDarkMode ? '#334155' : '#E2E8F0', // slate-700 / slate-200
-  textColor: isDarkMode ? '#94A3B8' : '#64748B', // slate-400 / slate-500
-  tooltipBg: isDarkMode ? '#1E293B' : '#FFFFFF', // slate-800 / white
-  tooltipBorder: isDarkMode ? '#334155' : '#E2E8F0', // slate-700 / slate-200
-  tooltipText: isDarkMode ? '#F8FAFC' : '#0F172A', // slate-50 / slate-900
+  gridColor: 'var(--brand-border)',
+  textColor: 'var(--brand-text-secondary)',
+  tooltipBg: 'var(--brand-surface)',
+  tooltipBorder: 'var(--brand-border)',
+  tooltipText: 'var(--brand-text)',
 });

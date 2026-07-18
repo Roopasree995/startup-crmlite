@@ -2,7 +2,7 @@ import { useMemo, memo } from 'react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { getRevenueByMonth } from '../../utils/analyticsHelpers';
 import { useTheme } from '../../context/ThemeContext';
-import { getChartTheme } from '../../constants';
+import { getChartTheme, CHART_COLORS } from '../../constants';
 
 // Formatting currency helper - defined outside component
 const formatCurrency = (val) => {
@@ -62,8 +62,8 @@ function RevenueChartCard({ leads = [] }) {
             <AreaChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#22C55E" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="#22C55E" stopOpacity={0} />
+                  <stop offset="5%" stopColor={CHART_COLORS.success} stopOpacity={0.4} />
+                  <stop offset="95%" stopColor={CHART_COLORS.success} stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={theme.gridColor} />
@@ -83,7 +83,7 @@ function RevenueChartCard({ leads = [] }) {
               <Area
                 type="monotone"
                 dataKey="revenue"
-                stroke="#22C55E"
+                stroke={CHART_COLORS.success}
                 strokeWidth={3}
                 fillOpacity={1}
                 fill="url(#colorRevenue)"
