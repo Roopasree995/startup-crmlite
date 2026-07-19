@@ -1,11 +1,13 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
-// Create Axios instance with API base URL configured from Vite environment variables.
-// Fallback to http://localhost:5000 in case the environment variable is not defined.
+// Create Axios instance with API base URL configured dynamically.
+// In development, always use the local backend. In production, use VITE_API_URL or fall back to Railway.
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-});
+  baseURL: import.meta.env.DEV
+    ? 'http://localhost:5000'
+    : (import.meta.env.VITE_API_URL || 'https://startup-crmlite-production.up.railway.app'),
+})
 
 // Request interceptor to automatically attach the Authorization bearer token to every request.
 api.interceptors.request.use(

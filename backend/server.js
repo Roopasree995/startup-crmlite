@@ -37,6 +37,9 @@ connectDB();
 
 const app = express();
 
+// Trust proxy headers (required for rate limiting when deployed behind proxies like Railway/Vercel/Heroku)
+app.set('trust proxy', 1);
+
 // Global Middleware Config
 
 // Use Helmet to secure HTTP headers
@@ -60,7 +63,8 @@ app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin (like mobile apps, postman, curl, or same-origin)
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Also allow any local development server port (e.g., localhost:5174)
+      if (!origin || allowedOrigins.includes(origin) || /^http:\/\/localhost:\d+$/.test(origin)) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
