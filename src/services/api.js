@@ -4,8 +4,8 @@ import toast from 'react-hot-toast'
 // Create Axios instance with API base URL configured from Vite environment variables.
 // Fallback to http://localhost:5000 in case the environment variable is not defined.
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
-})
+  baseURL: import.meta.env.VITE_API_URL,
+});
 
 // Request interceptor to automatically attach the Authorization bearer token to every request.
 api.interceptors.request.use(
