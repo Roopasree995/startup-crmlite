@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 
 // Create Axios instance with API base URL configured dynamically.
 // In development, always use the local backend. In production, use VITE_API_URL or fall back to Railway.
+console.log("API URL =", import.meta.env.VITE_API_URL);
 const api = axios.create({
   baseURL: import.meta.env.DEV
     ? 'http://localhost:5000'
