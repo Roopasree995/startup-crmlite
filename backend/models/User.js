@@ -62,6 +62,24 @@ const userSchema = new mongoose.Schema(
       default: 'user'
     },
     /**
+     * The phone number of the user.
+     * @type {String}
+     */
+    phoneNumber: {
+      type: String,
+      trim: true,
+      default: ''
+    },
+    /**
+     * The profile picture URL or path of the user.
+     * @type {String}
+     */
+    profilePicture: {
+      type: String,
+      trim: true,
+      default: ''
+    },
+    /**
      * Flag indicating if the user account is active.
      * Defaults to true.
      * @type {Boolean}

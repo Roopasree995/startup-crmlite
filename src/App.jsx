@@ -3,6 +3,7 @@ import { BrowserRouter, useRoutes, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import routes from './routes'
 import Sidebar from './components/Sidebar'
+import Header from './components/Header'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { LeadProvider } from './context/LeadContext'
 import { ThemeProvider } from './context/ThemeContext'
@@ -34,18 +35,21 @@ function AppContent() {
         {showSidebar && <Sidebar />}
 
         {/* Content Wrapper */}
-        <div className={`flex-1 min-w-0 ${showSidebar ? 'pt-14 pb-16 md:pt-0 md:pb-0' : ''}`}>
-          {/* Suspense handles loading fallback for lazy-loaded route views */}
-          <Suspense fallback={
-            <div className="flex h-[80vh] items-center justify-center p-6 text-sm text-slate-500">
-              <div className="flex flex-col items-center gap-2">
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
-                <span>Loading view...</span>
+        <div className={`flex-1 flex flex-col min-w-0 ${showSidebar ? 'pt-14 pb-16 md:pt-0 md:pb-0' : ''}`}>
+          {showSidebar && <Header />}
+          <div className="flex-1">
+            {/* Suspense handles loading fallback for lazy-loaded route views */}
+            <Suspense fallback={
+              <div className="flex h-[80vh] items-center justify-center p-6 text-sm text-slate-500">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
+                  <span>Loading view...</span>
+                </div>
               </div>
-            </div>
-          }>
-            {element}
-          </Suspense>
+            }>
+              {element}
+            </Suspense>
+          </div>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { LayoutDashboard, Users, BarChart3, Settings, Sparkles, Menu, X } from 'lucide-react'
 import DarkModeToggle from './common/DarkModeToggle'
+import ProfileDropdown from './ProfileDropdown'
 
 const navItems = [
   { path: '/', label: 'Dashboard', subLabel: 'Overview & Stats', icon: LayoutDashboard },
@@ -31,14 +32,19 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {/* Hamburger Menu Button (min 44x44px touch target) */}
-        <button
-          onClick={toggleMobileMenu}
-          aria-label="Toggle navigation menu"
-          className="flex h-11 w-11 items-center justify-center rounded-lg text-gray-550 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-white transition-colors cursor-pointer"
-        >
-          {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Mobile Actions: Profile and Hamburger Menu */}
+        <div className="flex items-center gap-2">
+          <ProfileDropdown />
+          
+          {/* Hamburger Menu Button (min 44x44px touch target) */}
+          <button
+            onClick={toggleMobileMenu}
+            aria-label="Toggle navigation menu"
+            className="flex h-11 w-11 items-center justify-center rounded-lg text-gray-555 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-white transition-colors cursor-pointer"
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </header>
 
       {/* ========================================================================= */}

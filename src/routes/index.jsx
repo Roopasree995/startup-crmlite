@@ -10,6 +10,7 @@ const AnalyticsPage = lazy(() => import('../pages/Analytics'))
 const NotFoundPage = lazy(() => import('../pages/NotFound'))
 const LoginPage = lazy(() => import('../pages/Login'))
 const RegisterPage = lazy(() => import('../pages/Register'))
+const ProfilePage = lazy(() => import('../pages/Profile'))
 
 /**
  * ProtectedRoute component.
@@ -64,6 +65,10 @@ const routes = [
       {
         path: '/analytics',
         element: <AnalyticsPage />,
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />,
       },
     ],
   },

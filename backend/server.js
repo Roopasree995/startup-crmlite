@@ -52,7 +52,8 @@ if (process.env.NODE_ENV === 'production') {
 // Production-ready dynamic CORS configuration
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  'https://your-app.vercel.app'
+  'https://your-app.vercel.app',
+  'http://localhost:5173'
 ].filter(Boolean); // Filter out undefined if FRONTEND_URL is not set
 
 app.use(

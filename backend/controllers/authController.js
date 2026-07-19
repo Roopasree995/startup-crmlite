@@ -137,7 +137,7 @@ export const getProfile = async (req, res, next) => {
  */
 export const updateProfile = async (req, res, next) => {
   try {
-    const { name, oldPassword, newPassword } = req.body;
+    const { name, phoneNumber, profilePicture, oldPassword, newPassword } = req.body;
 
     // Fetch user including password field (needed for verification check)
     const user = await User.findById(req.user._id).select('+password');
@@ -148,6 +148,15 @@ export const updateProfile = async (req, res, next) => {
     // Only update name (email cannot be updated through this endpoint)
     if (name) {
       user.name = name;
+    }
+
+    // Update optional profile fields
+    if (phoneNumber !== undefined) {
+      user.phoneNumber = phoneNumber;
+    }
+
+    if (profilePicture !== undefined) {
+      user.profilePicture = profilePicture;
     }
 
     // Handle password updates securely
